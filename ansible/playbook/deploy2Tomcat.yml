@@ -21,13 +21,13 @@
         #debug: var=ansible_eth0.ipv4.address
         service: name=tomcat8 state=started 
         sudo: yes
+      
+      - name: "wait to tomcat start"
+        pause: seconds=10
         
       - name: "check site"
         get_url: url=http://localhost:8080/helloworld/version.txt dest=./version.txt
         register: res
-      
-      - name: "wait to tomcat start"
-        pause: seconds=10
       
       - name: "verify"
         debug: var=res.msg
