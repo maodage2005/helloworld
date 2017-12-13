@@ -23,19 +23,7 @@
   </dependencies>
   <build>
     <finalName>helloworld</finalName>
-    <plugins>
-    <plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>sonar-maven-plugin</artifactId>
-    <version>5.0</version>
-    <configuration>
-        <sonar.projectKey>hudson.test.helloworld</sonar.projectKey>
-        <sonar.projectName>hudson.test.helloworld</sonar.projectName>
-        <sonar.projectVersion>1.0</sonar.projectVersion>
-        <sonar.sources>src/**</sonar.sources>
-    </configuration>
-    </plugin>
-    </plugins>
+   
   </build>
   
 </project>
