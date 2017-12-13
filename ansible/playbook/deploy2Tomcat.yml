@@ -26,7 +26,7 @@
         pause: seconds=10
         
       - name: "check site"
-        get_url: url=http://localhost:8080/helloworld/version.txt dest=./version.txt
+        get_url: url=http://{{ansible_eth0.ipv4.address}}:8080/helloworld/version.txt dest=./version.txt
         register: res
       
       - name: "verify"
