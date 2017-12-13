@@ -1,0 +1,23 @@
+---
+- hosts: ansible-linux-test 
+  tasks:
+      #- name: get ip
+      #  register
+      - name: "stop tomcat"
+        #debug: var=ansible_os_family
+        #debug: var=ansible_eth0.ipv4.address
+        service: name=tomcat8 state=stopped
+        failed_when: false
+        sudo: yes
+        
+      - name: "deploy tomcat"
+        #debug: var=ansible_os_family
+        #debug: var=ansible_eth0.ipv4.address
+        copy: src=helloworld.war dest=/var/lib/tomcat8/webapps/helloworld.war owner=tomcat group=tomcat mode=0777
+        sudo: yes
+
+      - name: "start tomcat"
+        #debug: var=ansible_os_family
+        #debug: var=ansible_eth0.ipv4.address
+        service: name=tomcat8 state=started 
+        sudo: yes

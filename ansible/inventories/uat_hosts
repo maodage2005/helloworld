@@ -1,0 +1,5 @@
+[aws_linux]
+ansible-linux-test ansible_ssh_host=10.255.77.128
+
+
+

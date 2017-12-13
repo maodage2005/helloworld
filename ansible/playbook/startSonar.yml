@@ -1,0 +1,10 @@
+---
+- hosts: ansible-linux-test 
+  tasks:
+      #- name: get ip
+      #  register
+      - name: "start sonar"
+        #debug: var=ansible_os_family
+        #debug: var=ansible_eth0.ipv4.address
+        command: /home/ec2-user/sonarqube-5.6.6/bin/linux-x86-64/sonar.sh start
+        failed_when: false
