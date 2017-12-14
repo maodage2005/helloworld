@@ -31,5 +31,5 @@
       
       - name: "verify"
         debug: var=res.msg
-        failed_when: res.msg != version
+        failed_when: '"OK" not in res.msg'
         
