@@ -26,10 +26,10 @@
         pause: seconds=10
         
       - name: "check site"
-        get_url: url=http://{{ansible_eth0.ipv4.address}}:8080/helloworld/version.txt dest=./version.txt
+        get_url: url=http://{{ansible_eth0.ipv4.address}}:8080/helloworld/version.txt dest=./version.txt force=yes
         register: res
       
       - name: "verify"
         debug: var=res.msg
-        failed_when: res.msg != {{ version }}
+        failed_when: res.msg != version
         
