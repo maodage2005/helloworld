@@ -1,5 +1,5 @@
 ---
-- hosts: ansible-linux-test 
+- hosts: ansible-linux-test
   tasks:
       #- name: get ip
       #  register
@@ -9,7 +9,7 @@
         service: name=tomcat8 state=stopped
         failed_when: false
         sudo: yes
-        
+
       - name: "deploy tomcat"
         #debug: var=ansible_os_family
         #debug: var=ansible_eth0.ipv4.address
@@ -19,17 +19,24 @@
       - name: "start tomcat"
         #debug: var=ansible_os_family
         #debug: var=ansible_eth0.ipv4.address
-        service: name=tomcat8 state=started 
+        service: name=tomcat8 state=started
         sudo: yes
-      
+
       - name: "wait to tomcat start"
         pause: seconds=10
-        
+
       - name: "check site"
         get_url: url=http://{{ansible_eth0.ipv4.address}}:8080/helloworld/version.txt dest=./version.txt force=yes
+        delegate_to: localhost
         register: res
-      
+
+      #- name: "fetch version file"
+      #  fetch: src=./version.txt dest=./version.txt flat=yes
+
+      - name: "get version"
+        command: "cat ./version.txt"
+        register: ver
+
       - name: "verify"
-        debug: var=res.msg
-        failed_when: '"OK" not in res.msg'
-        
+        debug: var=ver
+        failed_when: '("OK" not in res.msg) and ver.stdout != version'
